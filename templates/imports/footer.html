@@ -1,0 +1,14 @@
+<script>
+function checkScreenSize() {
+  const checkbox = document.getElementById('my-drawer');
+  if (window.innerWidth >= 768) { // md breakpoint
+    checkbox.checked = true;
+  } else {
+    checkbox.checked = false;
+  }
+}
+
+// Executa ao carregar e ao redimensionar
+window.addEventListener('load', checkScreenSize);
+window.addEventListener('resize', checkScreenSize);
+</script>

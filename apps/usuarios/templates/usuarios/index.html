@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2 class="text-2xl font-bold mb-4">Bem-vindo(a), {{ request.user.get_full_name }}</h2>
+  <p>Este é o painel inicial do sistema.</p>
+{% endblock %}

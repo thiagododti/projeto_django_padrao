@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html lang="pt-br" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ empresa.nome }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    {% if empresa.logotipo %}
+      <link rel="icon" type="image/png" href="{{ empresa.logotipo.url }}" />
+    {% endif %}
+    {% include 'imports/head.html' %}
+  </head>
+
+  <body class="bg-[{{ empresa.background }}] text-[{{ empresa.cor_texto }}] ">
+    <!-- Cabeçalho -->
+    <div id="main" class="flex flex-row min-h-screen">
+      <div id="sidebar" class="bg-[{{ empresa.cor_primaria }}] text-[{{ empresa.cor_primaria_texto }}] w-64 p-4 ">
+        {% include 'partials/menu.html' %}
+      </div>
+      <div id="body_content" class="flex-1 bg-white rounded-t-xl">
+        <header class=" text-[{{ empresa.cor_primaria_texto }}] p-4 flex justify-between items-center">
+          <div class="flex items-center gap-4">
+            {% if empresa.logotipo %}
+              <img src="{{ empresa.logotipo.url }}" alt="{{ empresa.nome }}" class="h-10" />
+            {% else %}
+              <h1 class="text-xl font-bold">{{ empresa.nome }}</h1>
+            {% endif %}
+          </div>
+          <nav>
+            <a href="{% url 'index' %}" class="text-[{{ empresa.cor_primaria_texto }}] hover:underline hover:text-[{{ empresa.cor_primeira_hover }}]">Início</a>
+            <a href="{% url 'logout' %}" class="ml-4 text-[{{ empresa.cor_primaria_texto }}] hover:underline hover:text-[{{ empresa.cor_primeira_hover }}]">Sair</a>
+          </nav>
+        </header> <!-- Conteúdo -->
+        <main class="p-6 w-full">
+          {% block content %}
+            <!-- As páginas vão injetar conteúdo aqui -->
+          {% endblock %}
+        </main>
+        <footer class="bg-gray-200 text-center text-sm p-4 mt-8">{{ empresa.rodape|default:'Sistema de Gestão Financeira' }}</footer>
+      </div>
+    </div>
+
+    <!-- Rodapé -->
+    {% include 'imports/footer.html' %}
+  </body>
+</html>
