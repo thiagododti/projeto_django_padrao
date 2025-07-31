@@ -1,36 +1,36 @@
 <ul class="flex flex-col gap-2">
   <a href="{% url 'index' %}">
-    <li class="hover:bg-[#364cd6] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] flex items-center gap-2">
+    <li class="hover:bg-[{{ empresa.cor_primaria_hover }}] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] flex items-center gap-2">
       <i class="material-icons">analytics</i>
       <p>Dashboard</p>
     </li>
   </a>
   <a href="#">
-    <li class="hover:bg-[#364cd6] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] flex items-center gap-2">
+    <li class="hover:bg-[{{ empresa.cor_primaria_hover }}] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] flex items-center gap-2">
       <i class="material-icons">payments</i>
       <p>Usuários</p>
     </li>
   </a>
   <a href="#">
-    <li class="hover:bg-[#364cd6] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] flex items-center gap-2">
+    <li class="hover:bg-[{{ empresa.cor_primaria_hover }}] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] flex items-center gap-2">
       <i class="material-icons">people</i>
       <p>Usuários</p>
     </li>
   </a>
   <a href="#">
-    <li class="hover:bg-[#364cd6] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] flex items-center gap-2">
+    <li class="hover:bg-[{{ empresa.cor_primaria_hover }}] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] flex items-center gap-2">
       <i class="material-icons">assessment</i>
       <p>Relatórios</p>
     </li>
   </a>
   
   <a href="#">
-    <li class="hover:bg-[#364cd6] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] flex items-center gap-2">
+    <li class="hover:bg-[{{ empresa.cor_primaria_hover }}] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] flex items-center gap-2">
       <i class="material-icons">settings</i>
       <p>Configurações</p>
     </li>
   <a class="mt-10" href="{% url 'logout' %}">
-    <li class="hover:bg-[#364cd6] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] flex items-center gap-2">
+    <li class="hover:bg-[{{ empresa.cor_primaria_hover }}] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] flex items-center gap-2">
       <i class="material-icons">logout</i>
       <p>Sair</p>
     </li>

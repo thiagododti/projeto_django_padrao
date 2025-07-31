@@ -47,10 +47,6 @@ DJANGO_APPS = [
 
 # Aplicativos locais
 LOCAL_APPS = [
-    'apps.aprovacoes.apps.AprovacoesConfig',
-    'apps.auditoria.apps.AuditoriaConfig',
-    'apps.cadastros.apps.CadastrosConfig',
-    'apps.financeiro.apps.FinanceiroConfig',
     'apps.usuarios.apps.UsuariosConfig',
     'apps.configuracoes.apps.ConfiguracoesConfig',
 ]
