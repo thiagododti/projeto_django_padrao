@@ -1,5 +1,5 @@
-from .models import Empresa
+from .models import Configuracao
 
 
 def empresa(request):
-    return {'empresa': Empresa.configuracao_ativa()}
+    return {'empresa': Configuracao.configuracao_ativa()}

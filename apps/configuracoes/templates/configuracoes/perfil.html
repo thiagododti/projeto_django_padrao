@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="flex flex-col gap-2 w-full">
+    <div class="flex gap-2 w-full md:flex-row flex-col justify-center">
+      <div class="flex w-full 2xl:w-1/3 justify-center items-center bg-[{{ empresa.cor_blocos }}] shadow-lg rounded-2xl p-6 border border-[{{ empresa.cor_bordas }}]">
+        <div class="flex flex-col items-center gap-6 text-center">
+          <!-- Foto do usuário -->
+          <div class="relative">
+            {% if user.photo %}
+              <img class="w-32 h-32 rounded-full border-4 border-[{{ empresa.cor_bordas }}] shadow-md object-cover" src="{{ user.photo.url }}" alt="Foto de {{ user.get_full_name }}" />
+            {% else %}
+              <div class="w-32 h-32 rounded-full border-4 border-[{{ empresa.cor_bordas }}] shadow-md flex items-center justify-center">
+                <i class="material-icons text-4xl text-[{{ empresa.cor_primaria }}]">person</i>
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- Nome -->
+          <h1 class="text-2xl font-extrabold text-[{{ empresa.cor_texto }}]">{{ user.get_full_name }}</h1>
+
+          <!-- Cargo / Departamento -->
+          <div class="text-sm text-gray-700 space-y-1 flex flex-col items-center gap-2">
+            <p class="font-medium">{{ user.cargo }}</p>
+            <p>{{ user.departamento }}</p>
+            <p>Contratado em {{ user.data_contratacao }}</p>
+            <p>{{ user.empresa }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex w-full justify-center items-center bg-[{{ empresa.cor_blocos }}] shadow-lg rounded-2xl p-6 border border-[{{ empresa.cor_bordas }}]">
+        {% include 'usuarios/partials/perfil_form.html' %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,33 @@
+<nav class="relative flex items-center gap-3">
+  {% load static %}
+
+  <!-- Nome do usuário -->
+  <p class="text-sm font-medium text-[{{ empresa.cor_primaria_texto }}]">{{ user.first_name }} {{ user.last_name }}</p>
+
+  <!-- Imagem do usuário com dropdown via peer -->
+  <div class="relative">
+    <!-- Botão invisível para controlar o dropdown -->
+    <input type="checkbox" id="dropdown-toggle" class="peer hidden" />
+
+    <!-- Label como botão (imagem do usuário) -->
+    <label for="dropdown-toggle" class="cursor-pointer">
+      {% if user.photo %}
+        <img src="{{ user.photo.url }}" alt="Usuário" class="h-10 w-10 rounded-full object-cover border border-gray-300 shadow-sm" />
+      {% else %}
+        <div class="h-10 w-10 flex items-center justify-center rounded-full border border-gray-300 shadow-sm">
+          <i class="material-icons text-4xl text-[{{ empresa.cor_primaria_texto }}]">person</i>
+        </div>
+      {% endif %}
+    </label>
+
+    <!-- Dropdown -->
+    <div class="absolute right-0 mt-2 w-48 bg-[{{ empresa.cor_primaria }}] rounded-xl border shadow-lg z-50 opacity-0 scale-95 peer-checked:opacity-100 peer-checked:scale-100 peer-checked:pointer-events-auto transition duration-200 origin-top-right pointer-events-none">
+      <div class="px-4 py-3 border-b">
+        <a href="{% url 'perfil' %}" class="text-sm font-semibold text-[{{ empresa.cor_primaria_texto }}]">Meu Perfil</a>
+      </div>
+      <div class="py-2">
+        <a href="{% url 'logout' %}" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-[{{empresa.cor_primaria_texto_hover}}]">Sair</a>
+      </div>
+    </div>
+  </div>
+</nav>

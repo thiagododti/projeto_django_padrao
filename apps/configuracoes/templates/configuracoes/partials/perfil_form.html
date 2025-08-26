@@ -1,0 +1,97 @@
+<form method="post" enctype="multipart/form-data" class="space-y-2 w-full">
+  {% csrf_token %}
+
+  <!-- Seção de Informações Pessoais -->
+  <div class="p-4 rounded-lg">
+    <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+      </svg>Informações Pessoais
+    </h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <!-- Nome e Sobrenome -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">{{ form.first_name.label }}</label>
+        {{ form.first_name }}
+        {% if form.first_name.errors %}
+          <p class="mt-1 text-sm text-red-600">{{ form.first_name.errors|striptags }}</p>
+        {% endif %}
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">{{ form.last_name.label }}</label>
+        {{ form.last_name }}
+        {% if form.last_name.errors %}
+          <p class="mt-1 text-sm text-red-600">{{ form.last_name.errors|striptags }}</p>
+        {% endif %}
+      </div>
+
+      <!-- CPF -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">{{ form.cpf.label }}</label>
+        {{ form.cpf }}
+        {% if form.cpf.errors %}
+          <p class="mt-1 text-sm text-red-600">{{ form.cpf.errors|striptags }}</p>
+        {% endif %}
+      </div>
+
+      <!-- Data de Nascimento -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">{{ form.data_nascimento.label }}</label>
+        {{ form.data_nascimento }}
+        {% if form.data_nascimento.errors %}
+          <p class="mt-1 text-sm text-red-600">{{ form.data_nascimento.errors|striptags }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Foto do Perfil -->
+    <div class="mt-6">
+      <label class="block text-sm font-medium text-gray-700 mb-2">{{ form.photo.label }}</label>
+      <div class="flex items-center space-x-4">
+        <div class="flex-1">
+          {{ form.photo }}
+          {% if form.photo.errors %}
+            <p class="mt-1 text-sm text-red-600">{{ form.photo.errors|striptags }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Seção de Informações Profissionais -->
+  <div class="bg-gray-50 p-4 rounded-lg">
+    <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6"></path>
+      </svg>Informações Profissionais
+    </h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Cargo -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">{{ form.cargo.label }}</label>
+        {{ form.cargo }}
+        {% if form.cargo.errors %}
+          <p class="mt-1 text-sm text-red-600">{{ form.cargo.errors|striptags }}</p>
+        {% endif %}
+      </div>
+
+      <!-- Data de Contratação -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">{{ form.data_contratacao.label }}</label>
+        {{ form.data_contratacao }}
+        {% if form.data_contratacao.errors %}
+          <p class="mt-1 text-sm text-red-600">{{ form.data_contratacao.errors|striptags }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Botões de Ação -->
+  <div class="flex justify-end space-x-2 pt-2">
+    <a href="{% url 'perfil' %} " class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-red-500 hover:text-white transition-colors">Cancelar</a>
+    <button type="submit" class="px-4 py-2 bg-[{{ empresa.cor_primaria }}] text-white rounded-lg hover:bg-[{{ empresa.cor_primaria_hover }}] focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">Salvar Alterações</button>
+  </div>
+</form>

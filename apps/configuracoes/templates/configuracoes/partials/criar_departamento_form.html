@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="w-full mx-auto bg-white shadow-md rounded-2xl p-8">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">{{ titulo_departamento }}</h2>
+
+    <form method="post" class="space-y-6">
+      {% csrf_token %}
+
+      <!-- Nome -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Nome</label>
+        {{ form.nome }}
+        {% if form.nome.errors %}
+          <p class="text-red-500 text-sm mt-1">{{ form.nome.errors.0 }}</p>
+        {% endif %}
+      </div>
+
+      <!-- Descrição -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Descrição</label>
+        {{ form.descricao }}
+      </div>
+
+      <!-- Empresa -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Empresa</label>
+        {{ form.empresa }}
+      </div>
+
+      <!-- Departamento Pai -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Departamento Pai</label>
+        {{ form.departamento_pai }}
+      </div>
+
+      <!-- Supervisores -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Supervisores do Departamento</label>
+        {{ form.supervisor }}
+      </div>
+
+      <div class="flex justify-between items-center pt-6 border-t border-gray-200">
+        <!-- Botão -->
+        <a href="{% url 'departamentos' %}" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-xl shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>Cancelar
+        </a>
+        <div class="pt-4">
+          <button type="submit" class="w-full sm:w-auto px-6 py-2.5 bg-blue-600 text-white font-medium rounded-xl shadow hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition">Salvar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- TomSelect -->
+  <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      new TomSelect('.supervisor-select', {
+        plugins: ['remove_button'],
+        placeholder: 'Selecione os supervisores...',
+        create: false,
+        hideSelected: true,
+        closeAfterSelect: true
+      })
+    })
+  </script>
+{% endblock %}

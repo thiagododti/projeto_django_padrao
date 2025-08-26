@@ -1,40 +1,109 @@
-<div>
-  <ul class="flex flex-col gap-2">
-    <a href="{% url 'index' %}">
-      <li class="hover:bg-[{{ empresa.cor_primaria_hover }}] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] flex items-center gap-2">
-        <i class="material-icons">analytics</i>
-        <p>Dashboard</p>
+<div id="menu_sidebar" class="flex flex-col gap-4">
+  {% if empresa.logotipo_dark %}
+    <img src="{{ empresa.logotipo_dark.url }}" class="p-4" />
+  {% endif %}
+
+  <ul class="flex flex-col gap-2 px-2">
+    <li>
+      <a href="{% url 'index' %}" class="block">
+        <div class="hover:bg-[{{ empresa.cor_primaria_hover }}] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] hover:text-[{{ empresa.cor_primaria_texto_hover }}] flex items-center gap-2 transition-colors duration-200">
+          <i class="material-icons">analytics</i>
+          <p>Dashboard</p>
+        </div>
+      </a>
+    </li>
+
+    {% if request.user.departamentos_supervisionados.exists %}
+      <li class="relative group">
+        <div class="hover:bg-[{{ empresa.cor_primaria_hover }}] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] hover:text-[{{ empresa.cor_primaria_texto_hover }}] flex items-center gap-2 cursor-pointer transition-colors duration-200">
+          <i class="material-icons">business</i>
+          <p class="flex-1">Gestão</p>
+          <i class="material-icons text-sm transform group-hover:rotate-180 transition-transform duration-200">expand_more</i>
+        </div>
+
+        <!-- Submenu com animação suave -->
+        <div class="overflow-hidden max-h-0 group-hover:max-h-40 transition-all duration-300 ease-in-out">
+          <div class="bg-gray-800 bg-opacity-50 rounded-sm mt-1 shadow-lg border-l-2 border-gray-600">
+            <a href="{% url 'construcao' %}" class="block">
+              <div class="hover:bg-[{{ empresa.cor_primaria_hover }}] p-2 text-[{{ empresa.cor_primaria_texto }}] hover:text-[{{ empresa.cor_primaria_texto_hover }}] flex items-center gap-2 pl-8 transition-colors duration-200">
+                <i class="material-icons text-sm">people</i>
+                <p>Gerencial</p>
+              </div>
+            </a>
+            <a href="{% url 'construcao' %}" class="block">
+              <div class="hover:bg-[{{ empresa.cor_primaria_hover }}] p-2 text-[{{ empresa.cor_primaria_texto }}] hover:text-[{{ empresa.cor_primaria_texto_hover }}] flex items-center gap-2 pl-8 transition-colors duration-200">
+                <i class="material-icons text-sm">trending_up</i>
+                <p>Indicadores</p>
+              </div>
+            </a>
+          </div>
+        </div>
       </li>
-    </a>
-    <a href="#">
-      <li class="hover:bg-[{{ empresa.cor_primaria_hover }}] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] flex items-center gap-2">
-        <i class="material-icons">payments</i>
-        <p>Usuários</p>
+    {% endif %}
+
+    <li>
+      <a href="{% url 'construcao' %}" class="block">
+        <div class="hover:bg-[{{ empresa.cor_primaria_hover }}] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] hover:text-[{{ empresa.cor_primaria_texto_hover }}] flex items-center gap-2 transition-colors duration-200">
+          <i class="material-icons">assessment</i>
+          <p>Relatórios</p>
+        </div>
+      </a>
+    </li>
+    {% if request.user.is_superuser %}
+      <li class="relative group">
+        <div class="hover:bg-[{{ empresa.cor_primaria_hover }}] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] hover:text-[{{ empresa.cor_primaria_texto_hover }}] flex items-center gap-2 cursor-pointer transition-colors duration-200">
+          <i class="material-icons">settings</i>
+          <p class="flex-1">Configurações</p>
+          <i class="material-icons text-sm transform group-hover:rotate-180 transition-transform duration-200">expand_more</i>
+        </div>
+
+        <!-- Submenu com animação suave -->
+        <div class="overflow-hidden max-h-0 group-hover:max-h-40 transition-all duration-300 ease-in-out">
+          <div class="bg-gray-800 bg-opacity-50 rounded-sm mt-1 shadow-lg border-l-2 border-gray-600">
+            <a href="{% url 'usuarios' %}" class="block">
+              <div class="hover:bg-[{{ empresa.cor_primaria_hover }}] p-2 text-[{{ empresa.cor_primaria_texto }}] hover:text-[{{ empresa.cor_primaria_texto_hover }}] flex items-center gap-2 pl-8 transition-colors duration-200">
+                <i class="material-icons text-sm">people</i>
+                <p>Usuarios</p>
+              </div>
+            </a>
+            <a href="{% url 'cargos' %}" class="block">
+              <div class="hover:bg-[{{ empresa.cor_primaria_hover }}] p-2 text-[{{ empresa.cor_primaria_texto }}] hover:text-[{{ empresa.cor_primaria_texto_hover }}] flex items-center gap-2 pl-8 transition-colors duration-200">
+                <i class="material-icons text-sm">work</i>
+                <p>Cargos</p>
+              </div>
+            </a>
+            <a href="{% url 'departamentos' %}" class="block">
+              <div class="hover:bg-[{{ empresa.cor_primaria_hover }}] p-2 text-[{{ empresa.cor_primaria_texto }}] hover:text-[{{ empresa.cor_primaria_texto_hover }}] flex items-center gap-2 pl-8 transition-colors duration-200">
+                <i class="material-icons text-sm">category</i>
+                <p>Departamentos</p>
+              </div>
+            </a>
+            <a href="{% url 'empresas' %}" class="block">
+              <div class="hover:bg-[{{ empresa.cor_primaria_hover }}] p-2 text-[{{ empresa.cor_primaria_texto }}] hover:text-[{{ empresa.cor_primaria_texto_hover }}] flex items-center gap-2 pl-8 transition-colors duration-200">
+                <i class="material-icons text-sm">domain</i>
+                <p>Empresas</p>
+              </div>
+            </a>
+          </div>
+        </div>
       </li>
-    </a>
-    <a href="#">
-      <li class="hover:bg-[{{ empresa.cor_primaria_hover }}] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] flex items-center gap-2">
-        <i class="material-icons">people</i>
-        <p>Usuários</p>
-      </li>
-    </a>
-    <a href="#">
-      <li class="hover:bg-[{{ empresa.cor_primaria_hover }}] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] flex items-center gap-2">
-        <i class="material-icons">assessment</i>
-        <p>Relatórios</p>
-      </li>
-    </a>
-    
-    <a href="#">
-      <li class="hover:bg-[{{ empresa.cor_primaria_hover }}] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] flex items-center gap-2">
-        <i class="material-icons">settings</i>
-        <p>Configurações</p>
-      </li>
-    <a class="mt-10" href="{% url 'logout' %}">
-      <li class="hover:bg-[{{ empresa.cor_primaria_hover }}] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] flex items-center gap-2">
-        <i class="material-icons">logout</i>
-        <p>Sair</p>
-      </li>
-    </a>
+    {% endif %}
+    <li>
+      <a href="{% url 'construcao' %}" class="block">
+        <div class="hover:bg-[{{ empresa.cor_primaria_hover }}] rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] hover:text-[{{ empresa.cor_primaria_texto_hover }}] flex items-center gap-2 transition-colors duration-200">
+          <i class="material-icons">account_tree</i>
+          <p>Organograma</p>
+        </div>
+      </a>
+    </li>
+
+    <li class="mt-10">
+      <a href="{% url 'logout' %}" class="block">
+        <div class="hover:bg-red-600 rounded-sm p-2 text-[{{ empresa.cor_primaria_texto }}] hover:text-white flex items-center gap-2 transition-colors duration-200">
+          <i class="material-icons">logout</i>
+          <p>Sair</p>
+        </div>
+      </a>
+    </li>
   </ul>
 </div>

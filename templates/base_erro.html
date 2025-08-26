@@ -15,7 +15,7 @@
   <body background="{% if empresa.background_img %}{{ empresa.background_img.url }}{% endif %}" class="overflow-x-hidden">
     <div class="flex items-center justify-center min-h-screen bg-[{{ empresa.background }}]">
       {% block content %}
-
+        
       {% endblock %}
     </div>
     {% include 'imports/footer.html' %}

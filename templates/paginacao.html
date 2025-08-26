@@ -1,0 +1,31 @@
+<!-- Paginação Usuários -->
+<div class="px-6 py-4 border-t bg-gray-50 flex items-center justify-between">
+  <div class="flex items-center space-x-2">
+    <span class="text-sm text-gray-700">{{ page_obj.paginator.count }} registros</span>
+  </div>
+  <div class="flex items-center space-x-2">
+    <!-- First page link -->
+    {% if page_obj.has_previous %}
+      <a href="?page=1" class="px-3 py-2 text-sm bg-white border border-gray-300 rounded hover:bg-gray-50">1</a>
+    {% endif %} {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}" class="px-1 py-2 flex text-sm bg-white border border-gray-300 rounded hover:bg-gray-50"><i class="material-icons">chevron_left</i></a>
+    {% else %}
+      <span class="px-1 py-2 flex text-sm bg-gray-100 border border-gray-300 rounded text-gray-400"><i class="material-icons">chevron_left</i></span>
+    {% endif %} {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+        <a href="?page={{ num }}" class="px-3 py-2 text-sm bg-indigo-600 text-white border border-indigo-600 rounded">{{ num }}</a>
+      {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
+        <a href="?page={{ num }}" class="pagination-btn px-3 py-2 text-sm bg-white border border-gray-300 rounded hover:bg-gray-50">{{ num }}</a>
+      {% endif %}
+    {% endfor %} {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}" class="px-1 py-2 flex text-sm bg-white border border-gray-300 rounded hover:bg-gray-50"><i class="material-icons">chevron_right</i></a>
+    {% else %}
+      <span class="px-1 py-2 flex text-sm bg-gray-100 border border-gray-300 rounded text-gray-400"><i class="material-icons">chevron_right</i></span>
+    {% endif %}
+
+    <!-- Last page link -->
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.paginator.num_pages }}" class="px-3 py-2 text-sm bg-white border border-gray-300 rounded hover:bg-gray-50">{{ page_obj.paginator.num_pages }}</a>
+    {% endif %}
+  </div>
+</div>

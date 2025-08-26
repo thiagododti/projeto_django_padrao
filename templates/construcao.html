@@ -1,0 +1,285 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <style>
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      max-width: 600px;
+      width: 90%;
+    }
+    
+    .construction-icon {
+      font-size: 80px;
+      animation: bounce 2s infinite;
+      margin-bottom: 20px;
+    }
+    
+    @keyframes bounce {
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-20px);
+      }
+      60% {
+        transform: translateY(-10px);
+      }
+    }
+    
+    .user-name {
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 2.5em;
+      font-weight: bold;
+      margin-bottom: 20px;
+      animation: pulse 3s infinite;
+    }
+    
+    @keyframes pulse {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.7;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    
+    .main-message {
+      font-size: 1.4em;
+      color: #333;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+    
+    .funny-text {
+      background: #fff3cd;
+      border: 2px dashed #ffc107;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 25px 0;
+      font-size: 1.1em;
+      color: #856404;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .funny-text::before {
+      content: '🔍';
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      font-size: 30px;
+      animation: spin 4s linear infinite;
+    }
+    
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    
+    .progress-bar {
+      background: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 20px;
+      margin: 25px 0;
+      position: relative;
+    }
+    
+    .progress-fill {
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+      background-size: 200% 200%;
+      height: 100%;
+      width: 42%;
+      border-radius: 10px;
+      animation: gradient 3s ease infinite;
+    }
+    
+    @keyframes gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    
+    .progress-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: bold;
+      color: #333;
+      font-size: 0.9em;
+    }
+    
+    .tools {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 25px 0;
+      flex-wrap: wrap;
+    }
+    
+    .tool {
+      font-size: 40px;
+      animation: wiggle 2s ease-in-out infinite;
+    }
+    
+    .tool:nth-child(1) {
+      animation-delay: 0s;
+    }
+    .tool:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .tool:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    .tool:nth-child(4) {
+      animation-delay: 0.6s;
+    }
+    
+    @keyframes wiggle {
+      0%,
+      100% {
+        transform: rotate(0deg);
+      }
+      25% {
+        transform: rotate(5deg);
+      }
+      75% {
+        transform: rotate(-5deg);
+      }
+    }
+    
+    .footer-message {
+      color: #666;
+      font-style: italic;
+      margin-top: 30px;
+      font-size: 0.95em;
+    }
+    
+    .curiosity-meter {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 4px solid #ff6b6b;
+    }
+    
+    .meter-title {
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    .meter-bar {
+      background: #e9ecef;
+      height: 10px;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    
+    .meter-fill {
+      background: linear-gradient(90deg, #28a745, #ffc107, #dc3545);
+      height: 100%;
+      width: 85%;
+      border-radius: 5px;
+      animation: curiosityPulse 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes curiosityPulse {
+      from {
+        width: 80%;
+      }
+      to {
+        width: 90%;
+      }
+    }
+  </style>
+  <div>
+    <div class="construction-icon">🚧</div>
+
+    <div class="user-name" id="userName">Olá, {{ user.first_name }} {{ user.last_name }}</div>
+
+    <div class="main-message">Opa! Parece que você encontrou uma página super secreta! 🕵️‍♂️</div>
+
+    <div class="funny-text">
+      <strong>Para os curiosos de plantão:</strong><br />
+      Esta página ainda está sendo construída com muito carinho, café ☕ e algumas lágrimas de programador 😅<br /><br />
+      <em>"Patience you must have, my young padawan"</em> - Yoda (provavelmente falando sobre desenvolvimento web)
+    </div>
+
+    <div class="curiosity-meter">
+      <div class="meter-title">📊 Nível de Curiosidade Detectado:</div>
+      <div class="meter-bar">
+        <div class="meter-fill"></div>
+      </div>
+      <small style="color: #666; margin-top: 5px; display: block;">85% - Altamente curioso! 🤓</small>
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
+      <div class="progress-text">42% concluído (ou não... quem sabe? 🤷‍♂️)</div>
+    </div>
+
+    <div class="tools">
+      <span class="tool">🔨</span>
+      <span class="tool">⚙️</span>
+      <span class="tool">💻</span>
+      <span class="tool">☕</span>
+    </div>
+
+    <div class="footer-message">
+      <strong>Enquanto isso...</strong><br />
+      Por que não volta mais tarde? Ou quem sabe explora outras seções do site? 🧭<br />
+      <small>P.S.: Obrigado por ser tão curioso(a)! É isso que torna a web mais interessante! 🌟</small>
+    </div>
+  </div>
+
+  <script>
+    // Atualizar o nome na página
+    document.addEventListener('DOMContentLoaded', function () {
+      const userName = getUserName()
+      document.getElementById('userName').textContent = `Olá, ${userName}!`
+    })
+    
+    // Efeito divertido de clique na barra de progresso
+    document.querySelector('.progress-bar').addEventListener('click', function () {
+      const progressFill = document.querySelector('.progress-fill')
+      const progressText = document.querySelector('.progress-text')
+    
+      const messages = ['42% concluído (ou não... quem sabe? 🤷‍♂️)', '99% quase lá... só mais 47 cafés ☕', 'Carregando... carregando... ainda carregando... 🔄', 'Em breve™ (definição de "breve" pode variar) ⏰', 'Status: Procrastinando com estilo 😎']
+    
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)]
+      progressText.textContent = randomMessage
+    
+      // Resetar após 3 segundos
+      setTimeout(() => {
+        progressText.textContent = '42% concluído (ou não... quem sabe? 🤷‍♂️)'
+      }, 3000)
+    })
+  </script>
+{% endblock %}

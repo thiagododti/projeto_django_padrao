@@ -1,7 +1,9 @@
 from pathlib import Path
 from dotenv import load_dotenv
 import os
-
+import logging
+from logging.handlers import TimedRotatingFileHandler
+from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -14,7 +16,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 
 # Configuração do modelo de usuário personalizado
-AUTH_USER_MODEL = 'usuarios.Usuario'
+AUTH_USER_MODEL = 'configuracoes.Usuario'
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'index'
@@ -47,17 +49,20 @@ DJANGO_APPS = [
 
 # Aplicativos locais
 LOCAL_APPS = [
-    'apps.usuarios.apps.UsuariosConfig',
     'apps.configuracoes.apps.ConfiguracoesConfig',
+
 ]
 
 # Apps de terceiros
 THIRD_PARTY_APPS = [
+    "debug_toolbar",
+
     # Adicione aqui apps de terceiros como rest_framework, etc.
 ]
 
 # Configuração de aplicativos instalados
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
+
 
 # Configuração de middleware
 MIDDLEWARE = [
@@ -68,6 +73,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 # Configuração de URLs
@@ -92,14 +98,32 @@ TEMPLATES = [
 # Configuração do WSGI
 WSGI_APPLICATION = 'config.wsgi.application'
 
+BANCO_ESCOLHIDO = 1
 
-# Banco de dados
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3',
+if BANCO_ESCOLHIDO == 1:
+    print('Banco de dados SQLite selecionado.')
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+elif BANCO_ESCOLHIDO == 2:
+    print('Banco de dados MySQL selecionado.')
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.getenv('DB_NAME'),
+            'USER': os.getenv('DB_USER'),
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            'HOST': os.getenv('DB_HOST'),
+            'PORT': os.getenv('DB_PORT'),
+            'OPTIONS': {
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+            }
+        }
+    }
+
 
 # Configurações de autenticação
 AUTH_PASSWORD_VALIDATORS = [
@@ -121,7 +145,7 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'pt-br'
 TIME_ZONE = 'America/Sao_Paulo'
 USE_I18N = True
-USE_TZ = True
+USE_TZ = False
 
 # Configurações de arquivos estáticos e mídia
 STATIC_URL = '/static/'
@@ -139,21 +163,30 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Configurações de log
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'logs' / 'django.log',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-    },
-}
+
+LOGS_DIR = BASE_DIR / 'logs'
+LOGS_DIR.mkdir(exist_ok=True)
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'file': {
+#             'level': 'INFO',
+#             'class': 'logging.handlers.TimedRotatingFileHandler',
+#             'filename': BASE_DIR / 'logs' / 'django.log',
+#             'when': 'midnight',
+#             'interval': 1,
+#             'backupCount': 30,
+#             'encoding': 'utf-8',
+#             'delay': True,  # <--- evita o lock inicial
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file'],
+#             'level': 'INFO',
+#             'propagate': True,
+#         },
+#     },
+# }
