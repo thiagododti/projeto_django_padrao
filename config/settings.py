@@ -50,7 +50,7 @@ DJANGO_APPS = [
 # Aplicativos locais
 LOCAL_APPS = [
     'apps.configuracoes.apps.ConfiguracoesConfig',
-
+    'apps.organograma.apps.OrganogramaConfig',
 ]
 
 # Apps de terceiros

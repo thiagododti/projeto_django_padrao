@@ -10,6 +10,7 @@ urlpatterns = [
     path('', login_view, name='login'),  # Página inicial
     path('admin/', admin.site.urls),
     path('configuracoes/', include('apps.configuracoes.urls')),
+    path('organograma/', include('apps.organograma.urls')),
     # rotas de erros
     path('403/', views.erro_403, name='erro_403'),
     path('404/', views.erro_404, name='erro_404'),
