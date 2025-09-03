@@ -1,0 +1,59 @@
+{% load static %}
+{% load widget_tweaks %}
+
+{% if form %}
+  <form method="post" id="filtro-form" class="w-full">
+    {% csrf_token %}
+
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+      <!-- Empresa -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">{{ form.empresa.label }}</label>
+        {% render_field form.empresa class='w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 auto-submit' %}
+      </div>
+
+      <!-- Departamento -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">{{ form.departamento.label }}</label>
+        {% render_field form.departamento class='w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 auto-submit' %}
+      </div>
+
+      <!-- Status -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">{{ form.status.label }}</label>
+        {% render_field form.status class='w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 auto-submit' %}
+      </div>
+
+      <!-- Dono -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">{{ form.dono.label }}</label>
+        {% render_field form.dono class='w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500' %}
+      </div>
+
+      <!-- Data de Atualização -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">{{ form.data_atualizacao.label }}</label>
+        {% render_field form.data_atualizacao class='w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 auto-submit' %}
+      </div>
+    </div>
+  </form>
+
+  <script>
+    const form = document.getElementById('filtro-form')
+    
+    // Submete o form quando um select muda
+    document.querySelectorAll('.auto-submit').forEach((el) => {
+      el.addEventListener('change', () => form.submit())
+    })
+    
+    // Submete o form quando pressiona Enter em campos de texto ou date
+    form.querySelectorAll('input[type="text"], input[type="date"]').forEach((el) => {
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault()
+          form.submit()
+        }
+      })
+    })
+  </script>
+{% endif %}
