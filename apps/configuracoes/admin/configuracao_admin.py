@@ -1,6 +1,6 @@
 from django.contrib import admin
-from models.configuracao import Configuracao
-from forms import ConfiguracaoForm
+from ..models import Configuracao
+from ..forms import ConfiguracaoForm
 
 
 @admin.register(Configuracao)
