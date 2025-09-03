@@ -3,7 +3,7 @@ from .views import *
 
 urlpatterns = [
     # LOGOUT - Registro de Novo Usuário ###############################################
-
+    path('login/', index, name='index'),
     path('logout/', logout_view, name='logout'),
     path('registrar/', registrar, name='registrar'),
     path('construcao/', construcao, name='construcao'),
