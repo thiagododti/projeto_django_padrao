@@ -16,5 +16,5 @@ def login_view(request):
             return redirect('index')
         else:
             # Se as credenciais forem inválidas, exiba uma mensagem de erro
-            return render(request, 'configuracoes/login.html', {'error': 'Usuário ou senha inválidos, ou usuário inativo.'})
+            return render(request, 'usuarios/login.html', {'error': 'Usuário ou senha inválidos, ou usuário inativo.'})
     return render(request, 'configuracoes/login.html')
