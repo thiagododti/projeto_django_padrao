@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <script src="https://balkan.app/js/OrgChart.js"></script>
+{% endblock %}
+{% block content %}
+  <div id="tree" class="w-full h-screen"></div>
+
+  <div id="membrosModal" class="fixed inset-0 z-[9999] hidden items-center justify-center">
+    <div id="membrosModalBackdrop" class="absolute inset-0 bg-[{{ empresa.cor_primaria }}] opacity-60 transition-all duration-300 ease-in-out pointer-events-none"></div>
+
+    <div id="membrosModalContent" class="relative bg-white rounded-2xl shadow-2xl p-8 max-w-4xl w-full max-h-[80vh] overflow-y-auto transform transition-all duration-300 ease-in-out scale-95 opacity-0 z-10">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold text-gray-800">Título da Modal</h2>
+        <button class="text-gray-500 hover:text-red-500 text-2xl leading-none">&times;</button>
+      </div>
+      <p class="text-gray-600"></p>
+      <div class="mt-6 text-right">
+        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="{% static 'js/organograma.js' %}"></script>
+{% endblock %}

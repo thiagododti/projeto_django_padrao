@@ -7,6 +7,7 @@ from debug_toolbar.toolbar import debug_toolbar_urls
 from config import views
 
 urlpatterns = [
+    path('',)
     path('', login_view, name='login'),  # Página inicial
     path('admin/', admin.site.urls),
     path('configuracoes/', include('apps.configuracoes.urls')),
